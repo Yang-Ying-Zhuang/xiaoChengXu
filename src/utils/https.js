@@ -14,13 +14,13 @@ $https.interceptors.request.use(function (config) {
   uni.showLoading({ //加载显示遮罩
       title:"加载中..."
     })
+
   // 在发送请求之前做些什么
   return config;
 }, function (error) {
   // 对请求错误做些什么
   return Promise.reject(error);
 });
-
 
 // 添加响应拦截器
 $https.interceptors.response.use(function (response) {
@@ -29,6 +29,7 @@ $https.interceptors.response.use(function (response) {
   if(conut === 0){
       uni.hideLoading() //加载隐藏遮罩
    }
+
   // 对响应数据做点什么
   return response;
 }, function (error) {
@@ -36,5 +37,7 @@ $https.interceptors.response.use(function (response) {
   return Promise.reject(error);
 });
  
+
+
 //必须暴露 $https
 export default $https

@@ -15,7 +15,8 @@
 		{
 			"path": "pages/goods_list/main",
 			"style": {
-				"navigationBarTitleText": "分类列表" 
+				"navigationBarTitleText": "分类列表",
+				"enablePullDownRefresh":true 
 			}
 		},
 		{

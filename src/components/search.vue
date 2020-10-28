@@ -1,9 +1,9 @@
 <template>
   <view class="search">
-      <navigator class="search_item">
-      <icon type="search" size="" color="#ccc" />
-      <text>搜索</text>
-    </navigator>
+      <view class="search_item">
+        <icon type="search" size="" color="#ccc" />
+        <text>搜索</text>
+    </view>
   </view>
 </template>
 
@@ -27,6 +27,11 @@ export default {
     justify-content: center;
     align-items: center;
     font-weight: bolder;
+    text{
+      color: #727272;
+      font-size: 32rpx;
+      font-weight: 600;
+    }
   }
 }
 

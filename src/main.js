@@ -3,8 +3,9 @@ import App from './App'
 
 //引入https
 import $https from "@/utils/https.js"
-//通过构造
+//通过原型构造
 Vue.prototype.$https = $https 
+
 
 Vue.config.productionTip = false
 

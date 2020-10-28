@@ -62,7 +62,9 @@ export default {
     //封装:第二种
      this.$https.get('/home/swiperdata').then(res =>{
           // console.log(res);
-          this.slideshow = res.data.message;
+          if(res.data.meta.status === 200){
+            this.slideshow = res.data.message;
+          }
       })
     },
    

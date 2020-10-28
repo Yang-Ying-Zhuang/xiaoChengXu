@@ -28,10 +28,11 @@
               class="right_item_item"
               v-for="(item2, index) in item.children"
               :key="index"
-              :url="'/pages/goods_list/main?cit='+ item2.cat_id"
+              :url="'/pages/goods_list/main?cid='+ item2.cat_id"
+              hover-class="none"
             >
-                  <image :src="item2.cat_icon" mode="" />
-                  <view class="right_item_name">{{ item2.cat_name }}</view>
+                <image :src="item2.cat_icon" mode="" />
+                <view class="right_item_name">{{ item2.cat_name }}</view>
             </navigator>
           </view>
 
@@ -91,7 +92,7 @@ export default {
 
     getCets: function () {
       this.$https.get("/categories").then((res) => {
-        console.log(res);
+        // console.log(res);
         catAll = res.data.message;
         //左边数据
         this.cat_left = catAll.map((v) => {
