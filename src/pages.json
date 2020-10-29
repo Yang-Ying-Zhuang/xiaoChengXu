@@ -22,7 +22,8 @@
 		{
 			"path": "pages/goods_detail/main",
 			"style": {
-				"navigationBarTitleText": "商品详情"  
+				"navigationBarTitleText": "商品详情",
+				"navigationStyle":"custom"  
 			}
 		},
 		{
@@ -81,25 +82,25 @@
     "list": [
 			{
         "pagePath": "pages/index/main",
-        "iconPath": "static/icons/home.png",
-        "selectedIconPath": "static/icons/home-o.png",
+        "iconPath": "static/img/home.png",
+        "selectedIconPath": "static/img/home-o.png",
         "text": "首页"
     }, {
         "pagePath": "pages/category/main",
-        "iconPath": "static/icons/category.png",
-        "selectedIconPath": "static/icons/category-o.png",
+        "iconPath": "static/img/category.png",
+        "selectedIconPath": "static/img/category-o.png",
         "text": "分类"
 		},
 		{
 			"pagePath": "pages/cart/main",
-			"iconPath": "static/icons/cart.png",
-			"selectedIconPath": "static/icons/cart-o.png",
+			"iconPath": "static/img/cart.png",
+			"selectedIconPath": "static/img/cart-o.png",
 			"text": "购物"
 		},
 		{
 			"pagePath": "pages/user/main",
-			"iconPath": "static/icons/my.png",
-			"selectedIconPath": "static/icons/my-o.png",
+			"iconPath": "static/img/my.png",
+			"selectedIconPath": "static/img/my-o.png",
 			"text": "用户"
 		}
 		

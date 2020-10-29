@@ -11,7 +11,7 @@
     class="goods"
     >
       <block v-for="(item,index) in goods" :key="index">
-        <view class="goods_item">
+        <!-- <view class="goods_item">
           <view class="goods_left">
             <image :src="item.goods_small_logo || '../../static/empty.png'" alt="">
           </view>
@@ -19,7 +19,9 @@
             <view class="goods_right_text">{{item.goods_name}}</view>
             <view class="goods_right_price">¥&nbsp;{{item.goods_price}}</view>
           </view>
-        </view>
+        </view> -->
+        <!-- 封装商品 -->
+        <List :item="item"></List>
       </block>
       <view  class="hidden" v-if="!sole">底部更多没有数据了~</view>
     </scroll-view>
@@ -31,8 +33,9 @@
 <script>
 import search from "../../components/search" //搜索
 import Tabs from "../../components/tabs"  //tabs栏
+import List from "../../components/list"
 export default {
-  components:{search,Tabs},
+  components:{search,Tabs,List},
   
   data(){
     return{
@@ -111,46 +114,47 @@ export default {
 
 .goods{
   width: 698rpx;
-  height: 209rpx;
+  // height: 209rpx;
   margin: 0 26rpx;
   height: calc(100vh - 44px - 100rpx);
   /* #ifdef H5 */
-   height: calc(100vh - 44px - 50px - 44px);
+   height: calc(100vh - 44px - 88rpx - 44px);
   /* #endif */
   
-   .goods_item{
-    display: flex;
-    word-break: break-all;
+  //  .goods_item{
+  //   display: flex;
+  //   word-break: break-all;
 
-    .goods_left{
-      image{
-        width: 191rpx;
-        height: 191rpx;
-        padding: 9rpx 43rpx 9rpx 15rpx;
-      }
-    }
-    .goods_right{
-        font-size: 24rpx;
-        padding-top: 26rpx;
-      .goods_right_text{
-        display : -webkit-box;
-          overflow : hidden;
-         -webkit-line-clamp : 2;
-         -webkit-box-orient : vertical;
-         word-break : breck-all;
-      }
-      .goods_right_price{
-        padding-top: 57rpx;
-        color: #e22018;
-      }
-    }
-  }
+  //   .goods_left{
+  //     image{
+  //       width: 191rpx;
+  //       height: 191rpx;
+  //       padding: 9rpx 43rpx 9rpx 15rpx;
+  //     }
+  //   }
+  //   .goods_right{
+  //       font-size: 24rpx;
+  //       padding-top: 26rpx;
+  //     .goods_right_text{
+  //       display : -webkit-box;
+  //         overflow : hidden;
+  //        -webkit-line-clamp : 2;
+  //        -webkit-box-orient : vertical;
+  //        word-break : breck-all;
+  //     }
+  //     .goods_right_price{
+  //       padding-top: 57rpx;
+  //       color: #e22018;
+  //     }
+  //   }
+  // }
 }
 .hidden{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 80rpx;
+  line-height: 80rpx;
   font-size: 32rpx;
 }
 </style>

@@ -2,6 +2,7 @@
 	<view class="index">
 	  <!-- 搜索框 -->
 	<Search></Search>
+  <scroll-view scroll-y class="index_item">
 	<!-- 轮播图  -->
 	<swiper class="swiper" :indicator-dots="true" :autoplay="true" indicator-active-color="#f76832" :interval="3000" :circular="true">
 		<swiper-item v-for="(item) in slideshow" :key="item.goods_id">
@@ -26,7 +27,7 @@
 			</navigator>
 		</view>
 	</view>
-
+ </scroll-view>
 
 	</view>
 </template>
@@ -50,101 +51,84 @@ export default {
   methods: {
     //轮播图
     getSlideshow: function () {
-    // 第一种请求
-    //   uni.request({
-    //     method: "get",
-    //     url: "https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata",
-    //     success: (res) => {
-    //       console.log(res);
-    //       this.slideshow = res.data.message;
-    //     },
-    //   });
-    //封装:第二种
-     this.$https.get('/home/swiperdata').then(res =>{
-          // console.log(res);
-          if(res.data.meta.status === 200){
-            this.slideshow = res.data.message;
-          }
-      })
+      // 第一种请求
+      //   uni.request({
+      //     method: "get",
+      //     url: "https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata",
+      //     success: (res) => {
+      //       console.log(res);
+      //       this.slideshow = res.data.message;
+      //     },
+      //   });
+      //封装:第二种
+      this.$https.get("/home/swiperdata").then((res) => {
+        // console.log(res);
+        if (res.data.meta.status === 200) {
+          this.slideshow = res.data.message;
+        }
+      });
     },
-   
     //导航菜单
     getNav: function () {
-      // uni.request({
-      //   method: "get",
-      //   url: "https://api-hmugo-web.itheima.net/api/public/v1/home/catitems",
-      //   success: (res) => {
-      //     console.log(res);
-      //     this.nav = res.data.message;
-      //   },
-      // });
-       this.$https.get('/home/catitems').then(res =>{
-          // console.log(res);
-           this.nav = res.data.message;
-      })
+      this.$https.get("/home/catitems").then((res) => {
+        // console.log(res);
+        this.nav = res.data.message;
+      });
     },
     //楼层
     getFloor: function () {
-      // uni.request({
-      //   method: "get",
-      //   url: "https://api-hmugo-web.itheima.net/api/public/v1/home/floordata",
-      //   success: (res) => {
-      //     console.log(res);
-      //     this.floor = res.data.message;
-      //   },
-      // });
-      this.$https.get('/home/floordata').then(res =>{
-          // console.log(res);
-          this.floor = res.data.message;
-      })
+      this.$https.get("/home/floordata").then((res) => {
+        // console.log(res);
+        this.floor = res.data.message;
+      });
     },
   },
 };
 </script>
 
 <style lang="less">
-/* #ifdef  H5 */
-// .index{
-//    background-color: #ccc;
-// }
-/* #endif  */
-
-.swiper {
-  height: 340rpx;
-  image {
-    width: 750rpx;
+.index_item {
+  height: calc(100vh - 100rpx);
+  /* #ifdef H5 */
+  height: calc(100vh - 44px - 100rpx - 50px);
+  /* #endif */
+  .swiper {
     height: 340rpx;
-  }
-}
-.nav {
-  display: flex;
-  justify-content: space-evenly;
-  margin: 10rpx 0 43rpx;
-  image {
-    width: 128rpx;
-    height: 140rpx;
-  }
-}
-.floor {
-  .floor_title {
     image {
       width: 750rpx;
-      height: 59rpx;
+      height: 340rpx;
     }
   }
-  .floor_item {
-    overflow: hidden;
-    navigator {
-      float: left;
-      &:nth-child(1) image {
-        height: 386rpx;
+  .nav {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10rpx 0 43rpx;
+    image {
+      width: 128rpx;
+      height: 140rpx;
+    }
+  }
+  .floor {
+    .floor_title {
+      image {
+        width: 750rpx;
+        height: 59rpx;
       }
     }
-    image {
-      width: 232rpx;
-      height: 188rpx;
-      margin-left: 14rpx;
-      margin-bottom: 5rpx;
+    .floor_item {
+      overflow: hidden;
+      navigator {
+        float: left;
+        &:nth-child(1) image {
+          height: 386rpx;
+        }
+      }
+      image {
+        width: 232rpx;
+        height: 188rpx;
+        margin-left: 14rpx;
+        margin-bottom: 5rpx;
+      }
     }
   }
 }

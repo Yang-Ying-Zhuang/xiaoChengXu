@@ -12,6 +12,8 @@
 	}
 </script>
 
-<style>
-	/*每个页面公共css */
+<style lang="less">
+	/*全局 页面公共css */
+   @import './static/icon/icon.less';  //图标
+
 </style>
