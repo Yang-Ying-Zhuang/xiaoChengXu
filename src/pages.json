@@ -63,7 +63,10 @@
 			}
 		},
 		{
-			"path": "pages/cart/main"
+			"path": "pages/cart/main",
+			"style": {
+				"navigationBarTitleText": "购物车"  
+			}
 		},
 		{
 			"path": "pages/user/main"

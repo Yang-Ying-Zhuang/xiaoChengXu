@@ -1,8 +1,8 @@
 <template>
   <view>
-     <navigator :url="'/pages/goods_detail/main?cid='+ item.goods_id" class="goods_item">
+     <navigator :url="'/pages/goods_detail/main?goods_id='+ item.goods_id" class="goods_item">
        <view class="goods_left">
-         <image :src="item.goods_small_logo || '../../static/empty.png'" alt="">
+         <image :src="item.goods_small_logo || '/static/empty.png'" alt="">
        </view>
        <view class="goods_right">
          <view class="goods_right_text">{{item.goods_name}}</view>

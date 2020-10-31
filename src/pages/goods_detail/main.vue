@@ -39,10 +39,10 @@
                  <view class="kefu">联系客服</view>
                  <button :show-message-card="true" open-type="contact">客</button>
               </view> 
-              <view class="iconfontCart">
+              <navigator open-type="switchTab" url="/pages/cart/main" class="iconfontCart">
                  <view class="iconfont icon-cart_icon"></view>
                  <view class="cart">购物车</view>
-              </view>
+              </navigator>
           </view>
           
           <view class="right">
@@ -58,16 +58,18 @@
 export default {
   data() {
     return {
-      goods_id: "", //参数id
-      pics_img: "", //图片
-      goods_price: "",
-      goods_name: "",
-      goods_introduce: "",
+      goods_id: '', //参数id
+      pics_img: [], //图片
+      goods_price: "", //价格
+      goods_name: "", //名称
+      goods_introduce: "", //富文本
+      goods_small_logo: "", //logo图片
     };
   },
   onLoad(options) {
     //  console.log(options);
-    this.goods_id = options.cid; //id数据
+    this.goods_id = options.goods_id; //id数据
+
     this.getDetail();
   },
   methods: {
@@ -87,12 +89,13 @@ export default {
           goods_id: this.goods_id,
         },
       });
-      console.log(res);
-      let { pics, goods_price, goods_name, goods_introduce } = res.data.message;
+      // console.log(res);
+      let {pics,goods_price,goods_name,goods_introduce,goods_id,goods_small_logo} = res.data.message;
       this.pics_img = pics;
       this.goods_price = goods_price;
       this.goods_name = goods_name;
       this.goods_introduce = goods_introduce;
+      this.goods_small_logo = goods_small_logo;
       //判断手机安卓还是苹果
       res = uni.getSystemInfoSync();
       // console.log(res.system);
@@ -100,9 +103,38 @@ export default {
         this.goods_introduce = this.goods_introduce.replace(/webp/g, "jpg");
       }
     },
-    shoppingCart(){
-      
-    }
+    /* 点击加入购物车
+	      1. 获取本地存储购物列表数据 cartList
+	      2. 判断当前商品是否在购物车列表中
+	      	2.1. 不存在(新商品)    商品数量初始化1，添加选中状态
+	      	2.2  已存在(旧商品)    基于原本的商品数量累加1，添加选中状态
+				*/
+    shoppingCart() {
+      let cartData = uni.getStorageSync("cartData_key") || [];
+      let index = cartData.findIndex(item => +item.goods_id === +this.goods_id);
+      if (index === -1) {
+        const data = {
+          goods_id: this.goods_id,
+          goods_small_logo: this.goods_small_logo,
+          goods_name: this.goods_name,
+          goods_price: this.goods_price,
+          goods_checked: true,
+          goods_count: 1,
+        };
+        cartData.push(data);
+        // uni.setStorageSync("cartData_key",cartData)
+      } else {
+        cartData[index].goods_count += 1;
+        cartData[index].goods_checked = true;
+        //  uni.setStorageSync("cartData_key",cartData)
+      }
+      uni.showToast({
+        title: "加入购物车成功",
+        icon: "success",
+        mask:true
+      });
+      uni.setStorageSync("cartData_key", cartData);
+    },
   },
 };
 </script>
@@ -112,7 +144,7 @@ export default {
   .open_type_navigateBack {
     background-color: rgba(255, 255, 255, 0.5);
     position: fixed;
-    top: 40rpx;
+    top: 60rpx;
     left: 20rpx;
     z-index: 9999;
     font-size: 48rpx;
@@ -200,7 +232,7 @@ export default {
     width: 750rpx;
     display: flex;
     height: 94rpx;
-    background-color: #eeeeee;
+    background-color: green;
     align-items: center;
     .left {
       flex: 1;
@@ -218,12 +250,11 @@ export default {
         .kefu {
           font-size: 26rpx;
         }
-        button{
+        button {
           position: absolute;
           left: 10rpx;
           bottom: -10rpx;
           opacity: 0;
-
         }
       }
       .iconfontCart {
@@ -232,7 +263,7 @@ export default {
         align-items: center;
         flex-direction: column;
         .icon-cart_icon {
-           font-size: 36rpx;
+          font-size: 36rpx;
         }
 
         .cart {
@@ -248,7 +279,7 @@ export default {
         font-size: 26rpx;
         height: 60rpx;
         width: 196rpx;
-        background-color: #fcae2f;
+        background-color: #f7ab24;
         border-radius: 28rpx;
         display: flex;
         justify-content: center;
